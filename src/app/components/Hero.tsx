@@ -72,13 +72,13 @@ export default function Hero({ data }: { data?: HeroData }) {
 
         <div className={s.heroStats}>
           {d.stats.map((stat, i) => (
-            <>
-              {i > 0 && <div key={`div-${i}`} className={s.heroStatDivider} />}
-              <div key={stat.label} className={s.heroStat}>
+            <div key={stat.label} style={{ display: "contents" }}>
+              {i > 0 && <div className={s.heroStatDivider} />}
+              <div className={s.heroStat}>
                 <span className={s.heroStatNum}>{stat.num}</span>
                 <span className={s.heroStatLabel}>{stat.label}</span>
               </div>
-            </>
+            </div>
           ))}
         </div>
       </div>
