@@ -1,105 +1,28 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --navy: #0A0F1E;
-  --navy-mid: #111827;
-  --navy-light: #1a2438;
-  --gold: #C9A84C;
-  --gold-light: #E8C96A;
-  --cream: #F8F7F4;
-  --muted: #8B9AB0;
+  --blue: #2563EB;
+  --blue-dark: #1D4ED8;
+  --blue-soft: #EFF6FF;
+  --blue-mid: #BFDBFE;
+  --bg: #F8FAFC;
+  --bg-alt: #F1F5F9;
+  --dark: #0F172A;
+  --mid: #334155;
+  --muted: #64748B;
+  --light: #94A3B8;
+  --border: #E2E8F0;
+  --white: #FFFFFF;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
-  font-family: var(--font-dm-sans), sans-serif;
-  background-color: #0A0F1E;
-  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  background: var(--white);
+  color: var(--dark);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-.font-display {
-  font-family: var(--font-playfair), serif;
-}
-
-/* Grain overlay */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  opacity: 0.025;
-  pointer-events: none;
-  z-index: 9999;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 128px 128px;
-}
-
-.gold-line {
-  width: 48px;
-  height: 2px;
-  background: #C9A84C;
-  flex-shrink: 0;
-}
-
-/* Animations */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.animate-fade-up            { animation: fadeUp 0.7s ease forwards; }
-.animate-fade-up-delay-1    { opacity: 0; animation: fadeUp 0.7s ease 0.1s forwards; }
-.animate-fade-up-delay-2    { opacity: 0; animation: fadeUp 0.7s ease 0.2s forwards; }
-.animate-fade-up-delay-3    { opacity: 0; animation: fadeUp 0.7s ease 0.3s forwards; }
-.animate-fade-up-delay-4    { opacity: 0; animation: fadeUp 0.7s ease 0.4s forwards; }
-.animate-fade-up-delay-5    { opacity: 0; animation: fadeUp 0.7s ease 0.5s forwards; }
-
-/* Gold glow */
-.gold-glow {
-  box-shadow: 0 0 40px rgba(201, 168, 76, 0.12);
-}
-
-/* Buttons */
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #C9A84C;
-  color: #0A0F1E;
-  font-family: var(--font-dm-sans), sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.btn-primary:hover {
-  background: #E8C96A;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(201, 168, 76, 0.3);
-}
-
-.btn-outline {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(201, 168, 76, 0.4);
-  color: #C9A84C;
-  font-family: var(--font-dm-sans), sans-serif;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  background: transparent;
-}
-
-.btn-outline:hover {
-  border-color: #C9A84C;
-  background: rgba(201, 168, 76, 0.08);
-}
+a { text-decoration: none; color: inherit; }
