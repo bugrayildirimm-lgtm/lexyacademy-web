@@ -1,7 +1,36 @@
 import Link from "next/link";
 import s from "./styles.module.css";
 
-export default function Hero() {
+type HeroData = {
+  headline: string;
+  headlineBlue: string;
+  subtext: string;
+  btnPrimary: string;
+  btnSecondary: string;
+  pill: string;
+  trust: string[];
+  stats: { num: string; label: string }[];
+};
+
+const fallback: HeroData = {
+  headline: "Train Smarter.",
+  headlineBlue: "Stay Compliant.",
+  subtext: "Expert-built compliance courses in AML, GDPR, Responsible Gambling and KYC. Train your team, track progress, and issue certificates — all in one place.",
+  btnPrimary: "Start Training Today",
+  btnSecondary: "Explore Courses",
+  pill: "AI-Powered Compliance Training",
+  trust: ["Regulator-aligned content", "PDF certificates issued instantly", "Built for gaming, finance & fintech"],
+  stats: [
+    { num: "4", label: "Expert Courses" },
+    { num: "500+", label: "Professionals Trained" },
+    { num: "30+", label: "Countries Covered" },
+    { num: "100%", label: "Regulator Aligned" },
+  ],
+};
+
+export default function Hero({ data }: { data?: HeroData }) {
+  const d = data || fallback;
+
   return (
     <section className={s.hero}>
       <div className={`${s.heroBlob} ${s.heroBlob1}`} />
@@ -13,26 +42,23 @@ export default function Hero() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M1.5 5.5l2 2 4-4" />
             </svg>
           </div>
-          <span>AI-Powered Compliance Training</span>
+          <span>{d.pill}</span>
         </div>
 
         <h1 className={s.heroH1}>
-          Train Smarter.<br />
-          <span>Stay Compliant.</span>
+          {d.headline}<br />
+          <span>{d.headlineBlue}</span>
         </h1>
 
-        <p className={s.heroSub}>
-          Expert-built compliance courses in AML, GDPR, Responsible Gambling and KYC.
-          Train your team, track progress, and issue certificates — all in one place.
-        </p>
+        <p className={s.heroSub}>{d.subtext}</p>
 
         <div className={s.heroBtns}>
-          <button className={s.btnSolid}>Start Training Today</button>
-          <Link href="#courses"><button className={s.btnOutline}>Explore Courses</button></Link>
+          <button className={s.btnSolid}>{d.btnPrimary}</button>
+          <Link href="#courses"><button className={s.btnOutline}>{d.btnSecondary}</button></Link>
         </div>
 
         <div className={s.heroTrust}>
-          {["Regulator-aligned content", "PDF certificates issued instantly", "Built for gaming, finance & fintech"].map((t) => (
+          {d.trust.map((t) => (
             <div key={t} className={s.trustItem}>
               <div className={s.trustCheck}>
                 <svg viewBox="0 0 10 10" fill="none" stroke="#2563EB" strokeWidth="2">
@@ -45,27 +71,16 @@ export default function Hero() {
         </div>
 
         <div className={s.heroStats}>
-          <div className={s.heroStat}>
-            <span className={s.heroStatNum}>4</span>
-            <span className={s.heroStatLabel}>Expert Courses</span>
-          </div>
-          <div className={s.heroStatDivider} />
-          <div className={s.heroStat}>
-            <span className={s.heroStatNum}>500+</span>
-            <span className={s.heroStatLabel}>Professionals Trained</span>
-          </div>
-          <div className={s.heroStatDivider} />
-          <div className={s.heroStat}>
-            <span className={s.heroStatNum}>30+</span>
-            <span className={s.heroStatLabel}>Countries Covered</span>
-          </div>
-          <div className={s.heroStatDivider} />
-          <div className={s.heroStat}>
-            <span className={s.heroStatNum}>100%</span>
-            <span className={s.heroStatLabel}>Regulator Aligned</span>
-          </div>
+          {d.stats.map((stat, i) => (
+            <>
+              {i > 0 && <div key={`div-${i}`} className={s.heroStatDivider} />}
+              <div key={stat.label} className={s.heroStat}>
+                <span className={s.heroStatNum}>{stat.num}</span>
+                <span className={s.heroStatLabel}>{stat.label}</span>
+              </div>
+            </>
+          ))}
         </div>
-
       </div>
     </section>
   );

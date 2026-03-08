@@ -1,3 +1,4 @@
+import { supabase } from "@/lib/supabase";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import TrustBar from "./components/TrustBar";
@@ -6,16 +7,24 @@ import Courses from "./components/Courses";
 import Pricing from "./components/Pricing";
 import Footer from "./components/Footer";
 
-export default function Home() {
+async function getContent() {
+  const { data } = await supabase.from("site_content").select("*");
+  if (!data) return {};
+  return Object.fromEntries(data.map((row) => [row.id, row.data]));
+}
+
+export default async function Home() {
+  const content = await getContent();
+
   return (
     <main>
       <Navbar />
-      <Hero />
+      <Hero data={content.hero} />
       <TrustBar />
-      <HowItWorks />
-      <Courses />
-      <Pricing />
-      <Footer />
+      <HowItWorks data={content.how_it_works} />
+      <Courses data={content.courses} />
+      <Pricing data={content.pricing} />
+      <Footer data={content.footer} />
     </main>
   );
 }
